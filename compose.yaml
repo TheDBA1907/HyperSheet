@@ -1,14 +1,19 @@
 services:
   postgres:
     image: postgres:16
-    container_name: hypersheet-postgres
+
+    container_name: hypersheet_postgres
+
     restart: unless-stopped
+
     environment:
-      POSTGRES_DB: hypersheet
       POSTGRES_USER: hypersheet
-      POSTGRES_PASSWORD: hypersheet_dev_password
+      POSTGRES_PASSWORD: hypersheet123
+      POSTGRES_DB: hypersheet
+
     ports:
       - "5432:5432"
+
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
