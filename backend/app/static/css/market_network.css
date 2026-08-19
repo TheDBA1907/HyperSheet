@@ -1,0 +1,565 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #07111f;
+    --panel: #0c1929;
+    --panel-2: #101f31;
+    --panel-3: #13263b;
+    --border: #21364d;
+    --text: #e8eef6;
+    --muted: #8395aa;
+    --green: #32d27d;
+    --red: #ff5d6c;
+    --blue: #5b8cff;
+    --yellow: #eeb83f;
+    --purple: #a66cff;
+    --cyan: #36cbd3;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+}
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+/* --------------------------------------------------
+   TOP BAR
+-------------------------------------------------- */
+
+.topbar {
+    height: 58px;
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    background: #081522;
+    border-bottom: 1px solid var(--border);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 230px;
+}
+
+.brand-icon {
+    color: var(--green);
+    font-size: 25px;
+}
+
+.brand-name {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.main-menu {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.main-menu a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 18px;
+    color: #b9c6d5;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+}
+
+.main-menu a:hover {
+    background: #102033;
+    color: white;
+}
+
+.main-menu a.active {
+    color: var(--green);
+    border-bottom-color: var(--green);
+}
+
+.top-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.primary-button,
+.secondary-button {
+    height: 36px;
+    padding: 0 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.primary-button {
+    background: #19a95c;
+    border: 1px solid #28c773;
+    color: white;
+}
+
+.secondary-button {
+    background: #102033;
+    border: 1px solid var(--border);
+    color: #dce5ef;
+}
+
+/* --------------------------------------------------
+   MAIN WORKSPACE
+-------------------------------------------------- */
+
+.workspace {
+    height: calc(100vh - 58px);
+    display: grid;
+    grid-template-columns: 230px minmax(600px, 1fr) 330px;
+}
+
+/* --------------------------------------------------
+   PANELS
+-------------------------------------------------- */
+
+.left-panel,
+.right-panel {
+    background: var(--panel);
+    overflow-y: auto;
+}
+
+.left-panel {
+    border-right: 1px solid var(--border);
+    padding: 16px 12px;
+}
+
+.right-panel {
+    border-left: 1px solid var(--border);
+    padding: 18px;
+}
+
+.panel-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.panel-subtitle {
+    color: #9caec0;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 15px 0 8px;
+    letter-spacing: .5px;
+}
+
+/* --------------------------------------------------
+   LEFT SIDE
+-------------------------------------------------- */
+
+.search-box {
+    width: 100%;
+    height: 34px;
+    padding: 0 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    background: #081522;
+    color: white;
+    outline: none;
+}
+
+.instrument-group {
+    margin-top: 13px;
+}
+
+.group-title {
+    color: #788da4;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.instrument-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    background: transparent;
+    color: #d5dfeb;
+    text-align: left;
+    padding: 6px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.instrument-item:hover {
+    background: #14263a;
+}
+
+.dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+
+.dot.currency {
+    background: var(--green);
+}
+
+.dot.commodity {
+    background: var(--yellow);
+}
+
+.dot.rate {
+    background: var(--blue);
+}
+
+.dot.equity {
+    background: var(--purple);
+}
+
+.dot.risk {
+    background: var(--cyan);
+}
+
+.network-options {
+    margin-top: 18px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+}
+
+.network-options label {
+    display: block;
+    color: #aebdcd;
+    font-size: 12px;
+    margin: 9px 0;
+}
+
+/* --------------------------------------------------
+   CENTER
+-------------------------------------------------- */
+
+.network-area {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background:
+        radial-gradient(circle at center, #10233a 0%, #07111f 60%);
+}
+
+.network-toolbar {
+    height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 6px;
+    background: #0b1828;
+    border-bottom: 1px solid var(--border);
+}
+
+.toolbar-button {
+    height: 32px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 0 14px;
+    background: transparent;
+    color: #9eb0c3;
+    cursor: pointer;
+}
+
+.toolbar-button:hover {
+    background: #13263b;
+}
+
+.toolbar-button.active {
+    color: var(--green);
+    background: #102b28;
+    border-color: #1c5e47;
+}
+
+/* --------------------------------------------------
+   NETWORK CANVAS
+-------------------------------------------------- */
+
+.network-canvas {
+    position: relative;
+    flex: 1;
+    min-height: 420px;
+    overflow: hidden;
+}
+
+.network-canvas::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: .10;
+    background-image:
+        linear-gradient(#5b7188 1px, transparent 1px),
+        linear-gradient(90deg, #5b7188 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+.network-lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.network-lines line {
+    stroke-width: 2;
+    opacity: .8;
+}
+
+.positive-line {
+    stroke: var(--green);
+}
+
+.negative-line {
+    stroke: var(--red);
+}
+
+/* --------------------------------------------------
+   MARKET NODES
+-------------------------------------------------- */
+
+.market-node {
+    position: absolute;
+    z-index: 2;
+    width: 108px;
+    height: 108px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 0 22px rgba(0, 0, 0, .45);
+    cursor: pointer;
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease;
+}
+
+.market-node:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+    box-shadow: 0 0 30px rgba(255,255,255,.15);
+}
+
+.node-title {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.node-value {
+    font-size: 14px;
+}
+
+.node-change {
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.currency-node {
+    background: #123526;
+    border: 2px solid var(--green);
+}
+
+.commodity-node {
+    background: #3a2b0e;
+    border: 2px solid var(--yellow);
+}
+
+.rate-node {
+    background: #142b4c;
+    border: 2px solid var(--blue);
+}
+
+.equity-node {
+    background: #2d1b48;
+    border: 2px solid var(--purple);
+}
+
+.risk-node {
+    background: #12343d;
+    border: 2px solid var(--cyan);
+}
+
+.positive {
+    color: var(--green);
+}
+
+.negative {
+    color: var(--red);
+}
+
+/* --------------------------------------------------
+   BOTTOM SECTION
+-------------------------------------------------- */
+
+.bottom-grid {
+    flex-shrink: 0;
+    height: 210px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 10px;
+    padding: 10px;
+    border-top: 1px solid var(--border);
+    background: #081522;
+}
+
+.bottom-card {
+    border: 1px solid var(--border);
+    background: var(--panel);
+    border-radius: 5px;
+    padding: 12px;
+    overflow: auto;
+}
+
+.card-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+th {
+    color: #71869d;
+    text-align: left;
+    font-weight: 500;
+    padding: 6px;
+    border-bottom: 1px solid var(--border);
+}
+
+td {
+    padding: 7px 6px;
+    border-bottom: 1px solid #15283b;
+}
+
+.metric-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 9px 0;
+    border-bottom: 1px solid #172a3e;
+    font-size: 12px;
+}
+
+/* --------------------------------------------------
+   SIMULATION
+-------------------------------------------------- */
+
+.field-label {
+    display: block;
+    color: #879aaf;
+    font-size: 11px;
+    margin: 15px 0 6px;
+}
+
+.input-field {
+    width: 100%;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: #081522;
+    color: white;
+    padding: 0 10px;
+    outline: none;
+}
+
+.input-field:focus {
+    border-color: #3e668d;
+}
+
+.simulate-button {
+    width: 100%;
+    height: 40px;
+    margin-top: 18px;
+    border: 1px solid #26cb75;
+    border-radius: 4px;
+    background: #18a95c;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.simulate-button:hover {
+    background: #20bd69;
+}
+
+.simulation-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 35px;
+    padding: 0 9px;
+    margin-bottom: 4px;
+    background: #0a1725;
+    border: 1px solid #1a3045;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+/* --------------------------------------------------
+   SCROLLBARS
+-------------------------------------------------- */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #081522;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #263c52;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #36536f;
+}
+
+/* --------------------------------------------------
+   SMALLER SCREENS
+-------------------------------------------------- */
+
+@media (max-width: 1100px) {
+
+    .workspace {
+        grid-template-columns: 190px minmax(500px, 1fr) 280px;
+    }
+
+    .market-node {
+        width: 90px;
+        height: 90px;
+    }
+}

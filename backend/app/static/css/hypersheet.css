@@ -147,3 +147,276 @@ td:first-child {
 th {
     background: #1e2833;
 }
+#hypersheet-grid {
+    width: 100%;
+    height: 520px;
+    border: 1px solid #2b3340;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.ag-theme-quartz {
+    --ag-font-family: Arial, sans-serif;
+    --ag-font-size: 13px;
+}
+.ag-cell {
+    font-size: 12px;
+}
+
+.ag-header-cell-text {
+    font-size: 12px;
+    font-weight: 600;
+}
+/* =========================================================
+   HYPERSHEET - EXCEL STYLE GRID
+   ========================================================= */
+
+#hypersheet-grid {
+    width: 100%;
+    height: calc(100vh - 170px);
+}
+
+/* AG Grid ana görünüm */
+.ag-theme-quartz,
+.ag-theme-alpine {
+    --ag-font-family: Arial, Helvetica, sans-serif;
+    --ag-font-size: 12px;
+
+    --ag-row-height: 24px;
+    --ag-header-height: 26px;
+
+    --ag-grid-size: 4px;
+    --ag-cell-horizontal-padding: 6px;
+
+    --ag-border-color: #d0d0d0;
+    --ag-row-border-color: #e1e1e1;
+    --ag-header-column-separator-color: #c8c8c8;
+
+    --ag-header-background-color: #f3f3f3;
+    --ag-header-foreground-color: #222222;
+
+    --ag-background-color: #ffffff;
+    --ag-foreground-color: #222222;
+
+    --ag-selected-row-background-color: #e8f1fb;
+    --ag-range-selection-border-color: #217346;
+
+    border: 1px solid #bdbdbd;
+}
+
+/* Hücreler */
+.ag-theme-quartz .ag-cell,
+.ag-theme-alpine .ag-cell {
+    display: flex;
+    align-items: center;
+
+    padding-left: 6px;
+    padding-right: 6px;
+
+    border-right: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+
+    line-height: 23px;
+}
+
+/* Satırlar */
+.ag-theme-quartz .ag-row,
+.ag-theme-alpine .ag-row {
+    border-bottom: none;
+}
+
+/* Başlık hücreleri */
+.ag-theme-quartz .ag-header-cell,
+.ag-theme-alpine .ag-header-cell {
+    padding-left: 6px;
+    padding-right: 6px;
+
+    border-right: 1px solid #c8c8c8;
+
+    font-weight: 600;
+}
+
+/* Başlık yazısı */
+.ag-theme-quartz .ag-header-cell-label,
+.ag-theme-alpine .ag-header-cell-label {
+    justify-content: flex-start;
+}
+
+/* Seçili hücre */
+.ag-theme-quartz .ag-cell-focus,
+.ag-theme-alpine .ag-cell-focus {
+    border: 2px solid #217346 !important;
+    outline: none !important;
+}
+
+/* Düzenlenen hücre */
+.ag-theme-quartz .ag-cell-inline-editing,
+.ag-theme-alpine .ag-cell-inline-editing {
+    padding-left: 5px;
+    background-color: #ffffff;
+    box-shadow: inset 0 0 0 2px #217346;
+}
+
+/* Hover görünümü */
+.ag-theme-quartz .ag-row-hover,
+.ag-theme-alpine .ag-row-hover {
+    background-color: #f7f9fb;
+}
+
+/* Sheet sekmeleri */
+.sheet-tabs {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+
+    min-height: 32px;
+    padding: 4px 8px 0 8px;
+
+    background-color: #f3f3f3;
+    border-top: 1px solid #cccccc;
+}
+
+.sheet-tabs button {
+    min-width: 90px;
+    height: 28px;
+
+    padding: 0 14px;
+
+    background-color: #e8e8e8;
+    border: 1px solid #c5c5c5;
+    border-bottom: none;
+
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.sheet-tabs button:hover {
+    background-color: #ffffff;
+}
+
+.sheet-tabs button.active {
+    background-color: #ffffff;
+    border-top: 2px solid #217346;
+    font-weight: 600;
+}
+/* =========================================================
+   LIVE FORMULA BAR
+   ========================================================= */
+
+.formula-bar {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 32px;
+
+    margin-bottom: 4px;
+
+    background-color: #ffffff;
+    border: 1px solid #bfc5cc;
+    border-radius: 3px;
+
+    overflow: hidden;
+}
+
+.cell-address {
+    width: 90px;
+    height: 100%;
+
+    padding: 0 10px;
+
+    border: none;
+    border-right: 1px solid #c9ced4;
+
+    background-color: #ffffff;
+    color: #1f2933;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    outline: none;
+}
+
+.formula-symbol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 100%;
+
+    border-right: 1px solid #c9ced4;
+
+    background-color: #f4f5f7;
+    color: #59636e;
+
+    font-family: Georgia, serif;
+    font-size: 14px;
+    font-style: italic;
+
+    user-select: none;
+}
+
+.formula-input {
+    flex: 1;
+    height: 100%;
+
+    padding: 0 10px;
+
+    border: none;
+
+    background-color: #ffffff;
+    color: #111827;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+
+    outline: none;
+}
+
+.formula-input:focus {
+    box-shadow: inset 0 -2px 0 #217346;
+}
+
+.formula-apply-button {
+    width: 38px;
+    height: 100%;
+
+    border: none;
+    border-left: 1px solid #c9ced4;
+
+    background-color: #f4f5f7;
+    color: #217346;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.formula-apply-button:hover {
+    background-color: #e8efe9;
+}
+.hypersheet-selected-cell {
+    background-color: rgba(33, 115, 70, 0.12) !important;
+}
+
+.hypersheet-active-cell {
+    background-color: rgba(33, 115, 70, 0.04) !important;
+}
+
+.hypersheet-selection-top {
+    border-top: 2px solid #217346 !important;
+}
+
+.hypersheet-selection-bottom {
+    border-bottom: 2px solid #217346 !important;
+}
+
+.hypersheet-selection-left {
+    border-left: 2px solid #217346 !important;
+}
+
+.hypersheet-selection-right {
+    border-right: 2px solid #217346 !important;
+}

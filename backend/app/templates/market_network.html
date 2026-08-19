@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HyperSheet - Market Network</title>
+
+    <link rel="stylesheet" href="/static/css/market_network.css">
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+        <div class="brand-icon">⌘</div>
+        <div class="brand-name">HyperSheet</div>
+    </div>
+
+    <nav class="main-menu">
+        <a href="/">Spreadsheet</a>
+        <a href="/market-network" class="active">Market Network</a>
+    </nav>
+
+    <div class="top-actions">
+        <button class="secondary-button">Data Sources</button>
+        <button class="primary-button">+ New Scenario</button>
+    </div>
+
+</header>
+
+
+<div class="workspace">
+
+    <!-- LEFT PANEL -->
+    <aside class="left-panel">
+
+        <div class="panel-title">
+            Market Network
+        </div>
+
+        <div class="panel-subtitle">
+            Instruments
+        </div>
+
+        <input
+            id="instrumentSearch"
+            class="search-box"
+            type="text"
+            placeholder="Search instrument..."
+        >
+
+        <div class="instrument-list">
+
+            <div class="instrument-group">
+                <div class="group-title">Currencies</div>
+
+                <button class="instrument-item">
+                    <span class="dot currency"></span>
+                    DXY
+                </button>
+
+                <button class="instrument-item">
+                    <span class="dot currency"></span>
+                    EUR/USD
+                </button>
+
+                <button class="instrument-item">
+                    <span class="dot currency"></span>
+                    USD/TRY
+                </button>
+            </div>
+
+
+            <div class="instrument-group">
+                <div class="group-title">Commodities</div>
+
+                <button class="instrument-item">
+                    <span class="dot commodity"></span>
+                    Gold
+                </button>
+
+                <button class="instrument-item">
+                    <span class="dot commodity"></span>
+                    Silver
+                </button>
+
+                <button class="instrument-item">
+                    <span class="dot commodity"></span>
+                    Brent Oil
+                </button>
+
+                <button class="instrument-item">
+                    <span class="dot commodity"></span>
+                    Copper
+                </button>
+            </div>
+
+
+            <div class="instrument-group">
+                <div class="group-title">Rates</div>
+
+                <button class="instrument-item">
+                    <span class="dot rate"></span>
+                    Fed Funds
+                </button>
+
+                <button class="instrument-item">
+                    <span class="dot rate"></span>
+                    US 10Y Yield
+                </button>
+
+                <button class="instrument-item">
+                    <span class="dot rate"></span>
+                    US Real Yield
+                </button>
+            </div>
+
+
+            <div class="instrument-group">
+                <div class="group-title">Equities</div>
+
+                <button class="instrument-item">
+                    <span class="dot equity"></span>
+                    S&P 500
+                </button>
+
+                <button class="instrument-item">
+                    <span class="dot equity"></span>
+                    Nasdaq 100
+                </button>
+
+                <button class="instrument-item">
+                    <span class="dot equity"></span>
+                    BIST 100
+                </button>
+            </div>
+
+
+            <div class="instrument-group">
+                <div class="group-title">Risk</div>
+
+                <button class="instrument-item">
+                    <span class="dot risk"></span>
+                    VIX
+                </button>
+
+                <button class="instrument-item">
+                    <span class="dot risk"></span>
+                    Türkiye CDS
+                </button>
+            </div>
+
+        </div>
+
+
+        <div class="network-options">
+
+            <div class="panel-subtitle">
+                Display Options
+            </div>
+
+            <label>
+                <input type="checkbox" checked>
+                Show relationship strength
+            </label>
+
+            <label>
+                <input type="checkbox" checked>
+                Show direction
+            </label>
+
+            <label>
+                <input type="checkbox">
+                Show lag
+            </label>
+
+            <label>
+                <input type="checkbox" checked>
+                Strong relationships only
+            </label>
+
+        </div>
+
+    </aside>
+
+
+    <!-- CENTER -->
+    <main class="network-area">
+
+        <div class="network-toolbar">
+
+            <button class="toolbar-button active">
+                Network
+            </button>
+
+            <button class="toolbar-button">
+                Heat Map
+            </button>
+
+            <button class="toolbar-button">
+                Matrix
+            </button>
+
+            <button class="toolbar-button">
+                Dislocations
+            </button>
+
+            <button class="toolbar-button">
+                History
+            </button>
+
+        </div>
+
+
+        <div id="networkCanvas" class="network-canvas">
+
+            <!-- SVG relationships -->
+            <svg
+                id="networkLines"
+                class="network-lines"
+                viewBox="0 0 1000 650"
+                preserveAspectRatio="none"
+            >
+
+                <line
+                    x1="200"
+                    y1="180"
+                    x2="470"
+                    y2="300"
+                    class="positive-line"
+                />
+
+                <line
+                    x1="470"
+                    y1="300"
+                    x2="760"
+                    y2="190"
+                    class="positive-line"
+                />
+
+                <line
+                    x1="470"
+                    y1="300"
+                    x2="760"
+                    y2="430"
+                    class="negative-line"
+                />
+
+                <line
+                    x1="200"
+                    y1="430"
+                    x2="470"
+                    y2="300"
+                    class="negative-line"
+                />
+
+                <line
+                    x1="470"
+                    y1="300"
+                    x2="480"
+                    y2="100"
+                    class="positive-line"
+                />
+
+            </svg>
+
+
+            <!-- NODES -->
+
+            <div
+                class="market-node commodity-node"
+                style="left: 12%; top: 19%;"
+            >
+                <div class="node-title">
+                    Brent Oil
+                </div>
+
+                <div class="node-value">
+                    82.45
+                </div>
+
+                <div class="node-change positive">
+                    +1.25%
+                </div>
+            </div>
+
+
+            <div
+                class="market-node commodity-node"
+                style="left: 12%; top: 58%;"
+            >
+                <div class="node-title">
+                    Gold
+                </div>
+
+                <div class="node-value">
+                    2,354
+                </div>
+
+                <div class="node-change negative">
+                    -0.15%
+                </div>
+            </div>
+
+
+            <div
+                class="market-node rate-node"
+                style="left: 43%; top: 39%;"
+            >
+                <div class="node-title">
+                    US 10Y Yield
+                </div>
+
+                <div class="node-value">
+                    4.32%
+                </div>
+
+                <div class="node-change positive">
+                    +0.08%
+                </div>
+            </div>
+
+
+            <div
+                class="market-node rate-node"
+                style="left: 44%; top: 7%;"
+            >
+                <div class="node-title">
+                    US Real Yield
+                </div>
+
+                <div class="node-value">
+                    2.15%
+                </div>
+
+                <div class="node-change positive">
+                    +0.03%
+                </div>
+            </div>
+
+
+            <div
+                class="market-node currency-node"
+                style="left: 74%; top: 20%;"
+            >
+                <div class="node-title">
+                    DXY
+                </div>
+
+                <div class="node-value">
+                    104.21
+                </div>
+
+                <div class="node-change positive">
+                    +0.32%
+                </div>
+            </div>
+
+
+            <div
+                class="market-node equity-node"
+                style="left: 74%; top: 58%;"
+            >
+                <div class="node-title">
+                    Nasdaq 100
+                </div>
+
+                <div class="node-value">
+                    18,204
+                </div>
+
+                <div class="node-change negative">
+                    -0.34%
+                </div>
+            </div>
+
+
+            <div
+                class="market-node risk-node"
+                style="left: 43%; top: 75%;"
+            >
+                <div class="node-title">
+                    VIX
+                </div>
+
+                <div class="node-value">
+                    14.21
+                </div>
+
+                <div class="node-change positive">
+                    +0.48%
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="bottom-grid">
+
+            <section class="bottom-card">
+
+                <div class="card-title">
+                    Market Overview
+                </div>
+
+                <table>
+
+                    <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Last</th>
+                        <th>Daily</th>
+                        <th>Weekly</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr>
+                        <td>DXY</td>
+                        <td>104.21</td>
+                        <td class="positive">+0.32%</td>
+                        <td class="positive">+1.15%</td>
+                    </tr>
+
+                    <tr>
+                        <td>Gold</td>
+                        <td>2,354</td>
+                        <td class="negative">-0.15%</td>
+                        <td class="negative">-0.42%</td>
+                    </tr>
+
+                    <tr>
+                        <td>Brent</td>
+                        <td>82.45</td>
+                        <td class="positive">+1.25%</td>
+                        <td class="positive">+3.21%</td>
+                    </tr>
+
+                    <tr>
+                        <td>Nasdaq</td>
+                        <td>18,204</td>
+                        <td class="negative">-0.34%</td>
+                        <td class="negative">-0.85%</td>
+                    </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+
+            <section class="bottom-card">
+
+                <div class="card-title">
+                    Relationship Summary
+                </div>
+
+                <div class="metric-row">
+                    <span>Total Relationships</span>
+                    <strong>561</strong>
+                </div>
+
+                <div class="metric-row">
+                    <span>Average Correlation</span>
+                    <strong>0.47</strong>
+                </div>
+
+                <div class="metric-row">
+                    <span>Strong Positive</span>
+                    <strong class="positive">30%</strong>
+                </div>
+
+                <div class="metric-row">
+                    <span>Strong Negative</span>
+                    <strong class="negative">8%</strong>
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- RIGHT PANEL -->
+    <aside class="right-panel">
+
+        <div class="panel-title">
+            Scenario Simulation
+        </div>
+
+
+        <label class="field-label">
+            Scenario Name
+        </label>
+
+        <input
+            id="scenarioName"
+            class="input-field"
+            type="text"
+            value="Oil Shock Scenario"
+        >
+
+
+        <label class="field-label">
+            Shock Instrument
+        </label>
+
+        <select
+            id="shockInstrument"
+            class="input-field"
+        >
+            <option value="oil">
+                Brent Oil
+            </option>
+
+            <option value="gold">
+                Gold
+            </option>
+
+            <option value="dxy">
+                DXY
+            </option>
+
+            <option value="rates">
+                US 10Y Yield
+            </option>
+
+            <option value="nasdaq">
+                Nasdaq 100
+            </option>
+        </select>
+
+
+        <label class="field-label">
+            Shock %
+        </label>
+
+        <input
+            id="shockValue"
+            class="input-field"
+            type="number"
+            value="20"
+            step="0.1"
+        >
+
+
+        <button
+            id="simulateButton"
+            class="simulate-button"
+        >
+            ▶ Run Simulation
+        </button>
+
+
+        <div class="simulation-divider"></div>
+
+
+        <div class="panel-title">
+            Simulation Results
+        </div>
+
+
+        <div id="simulationResults">
+
+            <div class="result-row">
+                <span>DXY</span>
+                <strong>—</strong>
+            </div>
+
+            <div class="result-row">
+                <span>Gold</span>
+                <strong>—</strong>
+            </div>
+
+            <div class="result-row">
+                <span>Silver</span>
+                <strong>—</strong>
+            </div>
+
+            <div class="result-row">
+                <span>S&P 500</span>
+                <strong>—</strong>
+            </div>
+
+            <div class="result-row">
+                <span>Nasdaq 100</span>
+                <strong>—</strong>
+            </div>
+
+            <div class="result-row">
+                <span>BIST 100</span>
+                <strong>—</strong>
+            </div>
+
+            <div class="result-row">
+                <span>USD/TRY</span>
+                <strong>—</strong>
+            </div>
+
+        </div>
+
+    </aside>
+
+</div>
+
+
+<script src="/static/js/market_network.js"></script>
+
+</body>
+</html>

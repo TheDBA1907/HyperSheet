@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>HyperSheet</title>
 
     <link rel="stylesheet" href="/static/css/hypersheet.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
 </head>
 
 <body>
@@ -17,217 +20,115 @@
     </div>
 
     <div class="title">
-        4D Elektronik Tablo
+        Semantic Data Workspace
     </div>
 
     <div class="actions">
-        ↶ ↷ 💾 Kaydet &nbsp; 🔗 Paylaş &nbsp; 👤
+        ↶ ↷ 💾 Save &nbsp; 🔗 Share &nbsp; 👤
     </div>
 </div>
 
 <div class="menu">
-    <div>Dosya</div>
-    <div>Düzenle</div>
-    <div>Görünüm</div>
-    <div>Ekle</div>
-    <div>Veri</div>
-    <div>Araçlar</div>
-    <div>Yardım</div>
+    <div>File</div>
+    <div>Edit</div>
+    <div>View</div>
+    <div>Insert</div>
+    <div>Data</div>
+    <div>Tools</div>
+    <div>AI</div>
+    <div onclick="window.location.href='/market-network'" style="cursor:pointer;">
+        Market Network
+    </div>
+    <div>Help</div>
 </div>
 
 <div class="toolbar">
-    <button class="btn">Yeni</button>
-    <button class="btn">Aç</button>
-    <button class="btn">Kaydet</button>
-    <button class="btn">Geri Al</button>
-    <button class="btn">Yinele</button>
-    <button class="btn">Filtre</button>
-    <button class="btn">Grafik</button>
+    <button class="btn" id="importExcelButton">
+        Import Excel
+    </button>
+
+    <input
+        type="file"
+        id="excelFileInput"
+        accept=".xlsx,.xlsm"
+        style="display: none;"
+    >
+
+    <button class="btn">Explain</button>
+    <button class="btn">Compare</button>
+    <button class="btn">Forecast</button>
+    <button class="btn">Dashboard</button>
+    <button class="btn">Report</button>
 </div>
 
 <div class="main">
 
     <aside class="sidebar">
-
-        <h3>Boyutlar</h3>
-
-        <div class="section">
-            <h3>📅 Zaman</h3>
-            <ul>
-                <li>2024</li>
-                <li>2025</li>
-                <li>Ocak</li>
-                <li>Şubat</li>
-                <li>Mart</li>
-                <li>Nisan</li>
-                <li>Mayıs</li>
-                <li>Haziran</li>
-                <li><span class="active">Temmuz</span></li>
-                <li>Ağustos</li>
-                <li>Eylül</li>
-                <li>Ekim</li>
-                <li>Kasım</li>
-                <li>Aralık</li>
-                <li>2026</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h3>🧩 Senaryo</h3>
-            <ul>
-                <li><span class="active">Baz Senaryo</span></li>
-                <li>Kötümser Senaryo</li>
-                <li>İyimser Senaryo</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h3>🏷 Ürün Kategorisi</h3>
-            <ul>
-                <li>Tümü</li>
-                <li>Elektronik</li>
-                <li>Giyim</li>
-                <li>Ev & Yaşam</li>
-                <li>Spor</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h3>🌍 Bölge</h3>
-            <ul>
-                <li>Tümü</li>
-                <li>Marmara</li>
-                <li>İç Anadolu</li>
-                <li>Ege</li>
-                <li>Akdeniz</li>
-                <li>Karadeniz</li>
-                <li>Doğu Anadolu</li>
-            </ul>
-        </div>
-
+        <h3>Dimensions</h3>
     </aside>
 
     <main class="content">
 
-        <div class="formula">
-            <input value="D5">
-            <input value="=Gelir - Gider">
+        <div class="formula-bar">
+
+            <input
+                id="cellAddress"
+                class="cell-address"
+                type="text"
+                value="A1"
+                readonly
+                aria-label="Selected cell address"
+            >
+
+            <div class="formula-symbol">
+                fx
+            </div>
+
+            <input
+                id="formulaInput"
+                class="formula-input"
+                type="text"
+                value=""
+                placeholder="Enter a value or formula"
+                autocomplete="off"
+                aria-label="Cell value or formula"
+            >
+
+            <button
+                id="applyFormulaButton"
+                class="formula-apply-button"
+                type="button"
+                title="Apply value"
+            >
+                ✓
+            </button>
+
         </div>
 
         <div class="filters">
-            <button class="btn">📅 Zaman: 2025 / Temmuz</button>
-            <button class="btn">🧩 Senaryo: Baz Senaryo</button>
-            <button class="btn">🌍 Bölge: Tümü</button>
-            <button class="btn">+ Boyut Ekle</button>
+            <button class="btn">📅 Time: July 2025</button>
+            <button class="btn">🧩 Scenario: Base Case</button>
+            <button class="btn">🌍 Region: All</button>
+            <button class="btn">+ Add Dimension</button>
         </div>
 
-        <table>
-            <tr>
-                <th>Ürün Kategorisi</th>
-                <th>Gelir (₺)</th>
-                <th>Gider (₺)</th>
-                <th>Kar (₺)</th>
-                <th>Büyüme (%)</th>
-            </tr>
-
-            {% for row in table_rows %}
-            <tr>
-                <td>{{ row.category }}</td>
-                <td>{{ row.revenue }}</td>
-                <td>{{ row.expense }}</td>
-                <td class="positive">{{ row.profit }}</td>
-                <td class="{% if '-' in row.growth %}negative{% else %}positive{% endif %}">
-                    {{ row.growth }}
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-
-        <div class="subgrid">
-            <h3>Diğer Boyutlarda Görünüm</h3>
-
-            <table>
-                <tr>
-                    <th></th>
-                    <th>Baz Senaryo Kar</th>
-                    <th>Kötümser Senaryo Kar</th>
-                    <th>İyimser Senaryo Kar</th>
-                </tr>
-
-                <tr>
-                    <td>Elektronik</td>
-                    <td>5.500.000</td>
-                    <td>3.850.000</td>
-                    <td>7.250.000</td>
-                </tr>
-
-                <tr>
-                    <td>Giyim</td>
-                    <td>3.700.000</td>
-                    <td>2.450.000</td>
-                    <td>4.950.000</td>
-                </tr>
-
-                <tr>
-                    <td>Ev & Yaşam</td>
-                    <td>2.320.000</td>
-                    <td>1.650.000</td>
-                    <td>3.150.000</td>
-                </tr>
-
-                <tr>
-                    <td>Spor</td>
-                    <td>1.510.000</td>
-                    <td>1.050.000</td>
-                    <td>2.050.000</td>
-                </tr>
-            </table>
-        </div>
+        <div
+            id="hypersheet-grid"
+            class="ag-theme-quartz"
+        ></div>
 
     </main>
 
     <aside class="rightbar">
-
-        <h3>Boyut Seçiciler</h3>
-
-        <p>Zaman</p>
-        <button class="btn">2025 / Temmuz</button>
-
-        <p>Senaryo</p>
-        <button class="btn">Baz Senaryo</button>
-
-        <p>Bölge</p>
-        <button class="btn">Tümü</button>
-
-        <p>Ürün Kategorisi</p>
-        <button class="btn">Tümü</button>
-
-        <hr>
-
-        <p>Görünüm</p>
-        <button class="btn">Pivot</button>
-        <button class="btn">Tablo</button>
-        <button class="btn">Grafik</button>
-
-        <div class="chart">
-            <p>Kar (₺) - Ürün Kategorisi</p>
-
-            <div class="bars">
-                <div class="bar" style="height:130px"></div>
-                <div class="bar" style="height:90px"></div>
-                <div class="bar" style="height:65px"></div>
-                <div class="bar" style="height:42px"></div>
-            </div>
-        </div>
-
+        <h3>Measures</h3>
     </aside>
 
 </div>
 
 <div class="tabs">
-    <div class="tab active-tab">Özet</div>
-    <div class="tab">Veri Girişi</div>
-    <div class="tab">Rapor</div>
+    <div class="tab active-tab">Summary</div>
+    <div class="tab">Data Entry</div>
+    <div class="tab">Report</div>
     <div class="tab">+</div>
 </div>
 
